@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.0/css/all.css"
+        integrity="sha384-OLYO0LymqQ+uHXELyx93kblK5YIS3B2ZfLGBmsJaUyor7CpMTBsahDHByqSuWW+q" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>Budget App</title>
+</head>
+<body>
+    <div class="header">
+        <h1 class="header__title">Budget App</h1>
+        <h2 class="header__date">October 2020</h2>
+    </div>
+
+    <div class="add">
+        <div class="income">
+            <div class="income__box">
+                <h3 class="income__name">Income</h3>
+                <input type="text" class="income__name-input" placeholder="Add income name">
+                <h3 class="income__amount">Income Amount</h3>
+                <input type="number" class="income__amount-input" placeholder="Add income amount">
+            </div>
+        </div>
+        <div class="expense">
+            <div class="expense__box">
+                <h3 class="expense__name">Expense</h3>
+                <input type="text" class="expense__name-input" placeholder="Add expense name">
+                <h3 class="expense__amount">Expense Amount</h3>
+                <input type="number" class="expense__amount-input" placeholder="Add expense amount">
+            </div>
+        </div>
+    </div>
+
+    <div class="display">
+        <div class="total">
+            <div class="total__budget">
+                <h4 class="total__budget-name">Budget</h4>
+                <i class="fas fa-money-bill total__budget-icon"></i>
+                <h3 class="total__budget-amount">$10000</h3>
+            </div>
+            <div class="total__expense">
+                <h4 class="total__expense-name">Expenses</h4>
+                <i class="fas fa-money-check total__expense-icon"></i>
+                <h3 class="total__expense-amount">$5000</h3>
+            </div>
+            <div class="total__balance">
+                <h4 class="total__balance-name">Balance</h4>
+                <i class="fas fa-yen-sign total__balance-icon"></i>
+                <h3 class="total__balance-amount">$5000</h3>
+            </div>
+        </div>
+        <div class="value">
+            <h4 class="value__title">Title Value</h4>
+            <p class="value__name">Dinner</p>
+            <p class="value__amount">50</p>
+            
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
