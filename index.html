@@ -12,24 +12,30 @@
 <body>
     <div class="header">
         <h1 class="header__title">Budget App</h1>
-        <h2 class="header__date">October 2020</h2>
+        <h2 class="header__date"></h2>
     </div>
 
     <div class="add">
         <div class="income">
             <div class="income__box">
-                <h3 class="income__name">Income</h3>
-                <input type="text" class="income__name-input" placeholder="Add income name">
-                <h3 class="income__amount">Income Amount</h3>
-                <input type="number" class="income__amount-input" placeholder="Add income amount">
+                <form>
+                    <label for="income__name" class="income__name">Income</label>
+                    <input id="income__name" type="text" class="add__input income__name-input" placeholder="Add income name">
+                    <label for="income__amount" class="income__amount">Income Amount</label>
+                    <input id="income__amount" type="number" class="add__input income__amount-input" placeholder="Add income amount">
+                    <input type="submit" value="Submit" class="add__button income__button">
+                </form>
             </div>
         </div>
         <div class="expense">
             <div class="expense__box">
-                <h3 class="expense__name">Expense</h3>
-                <input type="text" class="expense__name-input" placeholder="Add expense name">
-                <h3 class="expense__amount">Expense Amount</h3>
-                <input type="number" class="expense__amount-input" placeholder="Add expense amount">
+                <form>
+                    <label for="expense__name" class="expense__name">Expense</label>
+                    <input id="expense__name" type="text" class="add__input expense__name-input" placeholder="Add expense name">
+                    <label for="expense__amount" class="expense__amount">Expense Amount</label>
+                    <input id="expense__amount" type="number" class="add__input expense__amount-input" placeholder="Add expense amount">
+                    <input type="submit" value="Submit" class="add__button expense__button">
+                </form>
             </div>
         </div>
     </div>
@@ -39,47 +45,36 @@
             <div class="total__item">
                 <h4 class="total__name">Budget</h4>
                 <i class="fas fa-money-bill total__budget-icon total__icon"></i>
-                <h3 class="total__amount" id="total__budget">$10000</h3>
+                <h3 class="total__amount" id="total__budget">¥0</h3>
             </div>
             <div class="total__item">
                 <h4 class="total__name">Expenses</h4>
                 <i class="fas fa-money-check total__expense-icon total__icon"></i>
-                <h3 class="total__amount" id="total__expense">$5000</h3>
+                <h3 class="total__amount" id="total__expense">¥0</h3>
             </div>
             <div class="total__item">
                 <h4 class="total__name">Balance</h4>
                 <i class="fas fa-yen-sign total__balance-icon total__icon"></i>
-                <h3 class="total__amount" id="total__balance">$5000</h3>
+                <h3 class="total__amount" id="total__balance">¥0</h3>
             </div>
         </div>
         <div class="value">
             <table class="value__table">
+                <colgroup>
+                    <col span="1" style="width:15%">
+                    <col span="1" style="width:60%">
+                    <col span="1" style="width:25%">
+                </colgroup>
                 <thead>
                     <tr>
+                        <th>Date</th>
                         <th>Title</th>
                         <th>Value</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Dinner</td>
-                        <td>-3000</td>
-                    </tr>
-                    <tr>
-                        <td>Train pass</td>
-                        <td>-5000</td>
-                    </tr>
+                <tbody class="value__body">
                 </tbody>
             </table>
-
-            <!-- <div class="value__head">
-                <h4 class="value__head-title">Title</h4>
-                <h4 class="value__head-value">Value</h4>
-            </div>
-            <div class="value__list">
-                <p class="value__list-name">Dinner</p>
-                <p class="value__list-amount">50</p>
-            </div> -->
         </div>
     </div>
 
