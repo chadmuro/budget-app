@@ -1,12 +1,7 @@
 const date = document.querySelector('.header__date');
-const incomeName = document.querySelector('.income__name-input');
-const incomeAmount = document.querySelector('.income__amount-input');
-const incomeButton = document.querySelector('.income__button');
 const expenseName = document.querySelector('.expense__name-input');
 const expenseAmount = document.querySelector('.expense__amount-input');
 const expenseButton = document.querySelector('.expense__button');
-const budget = document.querySelector('#total__budget');
-const expense = document.querySelector('#total__expense');
 const balance = document.querySelector('#total__balance');
 const table = document.querySelector('.value__table');
 const body = document.querySelector('.value__body');
@@ -23,90 +18,85 @@ date.textContent = month;
 
 // CONSTRUCTOR
 let items = [];
-let budgetTotal = 0;
 let expenseTotal = 0;
-let balanceTotal = 0;
-
 
 // ADD ITEM
-function addIncome(e) {
-    e.preventDefault();
-
-    const name = incomeName.value;
-    const amount = incomeAmount.value;
-    const date = inputDate;
-
-    if(name && amount) {
-        items.push({
-            name,
-            amount,
-            date,
-            type: 'income'
-        });
-
-        budgetTotal += parseInt(amount);
-
-        updateTotals();
-        updateTable(name, amount, 'income');
-    }
-    
-    incomeName.value = '';
-    incomeAmount.value = '';
-    incomeName.focus();
-}
-
 function addExpense(e) {
     e.preventDefault();
 
     const name = expenseName.value;
     const amount = expenseAmount.value;
+    const id = Date.parse(new Date());
 
     if(name && amount) {
         items.push({
             name,
             amount,
-            date,
-            type: 'expense'
+            date: inputDate,
+            id
         });
 
-        expenseTotal += parseInt(amount);
-
-        updateTotals();
-        updateTable(name, amount, 'expense');
+        
+        updateTable(name, amount, inputDate, id);
     }
+
+    updateTotal(amount);
+
+    localStorage.setItem('expense', JSON.stringify(items));
     
     expenseName.value = '';
     expenseAmount.value = '';
     expenseName.focus();
 }
 
-
-function updateTotals() {
-    balanceTotal = budgetTotal - expenseTotal;
-    
-    budget.textContent = `¥${budgetTotal.toLocaleString()}`;
-    expense.textContent = `¥${expenseTotal.toLocaleString()}`;
-    balance.textContent = `¥${balanceTotal.toLocaleString()}`;
-
+function updateTotal(amount) {
+    expenseTotal += parseInt(amount);
+    balance.textContent = `¥${expenseTotal.toLocaleString()}`;
 }
 
-function updateTable(name, amount, type) {
+function updateTable(name, amount, date, id) {
     
     let newRow = document.createElement('tr');
     newRow.innerHTML = `
         <tr>
-            <td>${inputDate}</td>
-            <td>${name.toUpperCase()}</td>
+            <td>${date}</td>
+            <td>${name}</td>
             <td>¥${parseInt(amount).toLocaleString()}</td>
         </tr>
     `;
 
-    if (type === 'income') newRow.style.backgroundColor = 'lightgreen';
-    if (type === 'expense') newRow.style.backgroundColor = 'salmon';
+    newRow.style.backgroundColor = 'salmon';
+    newRow.id = id;
 
     body.appendChild(newRow);
 }
 
+function deleteItem(e) {
+    const id = parseInt(e.target.parentNode.id);
+    const element = document.getElementById(id);
+    const index = items.findIndex(item => item.id === id)
+    const amount = parseInt(items[index].amount);
+
+    items.splice(index, 1);
+    expenseTotal -= amount;
+    balance.textContent = `¥${expenseTotal.toLocaleString()}`;
+    element.parentNode.removeChild(element);
+
+    let stored = JSON.parse(localStorage.getItem('expense'));
+    stored.splice(index, 1);
+    localStorage.setItem('expense', JSON.stringify(stored));
+}
+
 // EVENT LISTENERS
-incomeButton.addEventListener('click', addIncome);
 expenseButton.addEventListener('click', addExpense);
+body.addEventListener('dblclick', deleteItem)
+
+// LOCAL STORAGE
+const data = JSON.parse(localStorage.getItem('expense'));
+if (data) {
+    data.forEach((expense) => {
+        items.push(expense);
+        updateTable(expense.name, expense.amount, expense.date, expense.id);
+        updateTotal(expense.amount);
+    });
+}
